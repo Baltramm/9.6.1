@@ -4,57 +4,47 @@ namespace _9._6._1
 {
     class Program
     {
-       
+
 
         static void Main(string[] args)
         {
-            Exception[] exceptions = new Exception[5];
-            Exception exp1 = new ArgumentException("Недопустимый аргумент");
-            
- 
+            Exception[] exceptions = new Exception[5] { new ArgumentException(), new MyException("Мое исключение"), new TimeoutException(), new NotSupportedException(), new DivideByZeroException() };
 
-
-            try
+            foreach (Exception ex in exceptions)
             {
-              int result =  Div(4,4);
-                Console.WriteLine(result);
-                foreach (Exception ex in exceptions)
+                try
                 {
-                    Console.WriteLine(ex.Message);
+                    throw ex;
                 }
+
+                catch (ArgumentException)
+                {
+                    Console.WriteLine("ArgumentException");
+                }
+                catch (MyException)
+                {
+                    Console.WriteLine("Мое исключение");
+                }
+
+                catch (TimeoutException)
+                {
+                    Console.WriteLine("TimeoutException");
+                }
+                catch (NotSupportedException)
+                {
+                    Console.WriteLine("NotSupportedException");
+                }
+                catch (DivideByZeroException)
+                {
+                    Console.WriteLine("DivideByZeroException");
+                }
+
+
             }
 
-            catch(ArgumentException)
-            {
-                Console.WriteLine(" ");  
-            }
-            catch (MyException)
-            {
-                Console.WriteLine("Делить на ноль нельзя");
-            }
-
-            catch (TimeoutException)
-            {
-                Console.WriteLine(" ");
-            }
-            catch (NotSupportedException)
-            {
-                Console.WriteLine(" ");
-            }
-            
-
-            static int Div(int a,int b)
-            {
-                return a / b;
-            }
-        }
-    }
-
-    class MyException : DivideByZeroException
-    {
-        public MyException(string message) : base(message)
-        {
 
         }
     }
+
+
 }
